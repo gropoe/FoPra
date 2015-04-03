@@ -26,6 +26,7 @@ public class GameRenderer implements CardboardView.StereoRenderer{
     }
 
     /**
+     * In onDrawEye we call the draw methods.
      *
      * @param eye The eye to render. Includes all required transformations.
      */

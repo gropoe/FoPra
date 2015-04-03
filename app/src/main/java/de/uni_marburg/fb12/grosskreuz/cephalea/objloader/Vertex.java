@@ -1,6 +1,8 @@
 package de.uni_marburg.fb12.grosskreuz.cephalea.objloader;
 
 /**
+ * Vertex Data for VBOs
+ *
  * Created by Felix on 31.03.2015.
  */
 public class Vertex {
