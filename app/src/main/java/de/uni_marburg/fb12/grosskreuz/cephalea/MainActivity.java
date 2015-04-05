@@ -22,7 +22,7 @@ public class MainActivity extends CardboardActivity{
 
         setContentView(R.layout.activity_main);
         CardboardView cardboardView = (CardboardView) findViewById(R.id.cardboard_view);
-        cardboardView.setRenderer(new GameRenderer());
+        cardboardView.setRenderer(new GameRenderer(new ResLoader(this.getApplicationContext())));
         setCardboardView(cardboardView);
 
         overlayView = (CardboardOverlayView) findViewById(R.id.overlay);
