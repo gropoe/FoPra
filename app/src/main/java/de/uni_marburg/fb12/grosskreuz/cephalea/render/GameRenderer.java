@@ -26,18 +26,17 @@ import de.uni_marburg.fb12.grosskreuz.cephalea.draw.DrawTeapot;
 public class GameRenderer implements CardboardView.StereoRenderer{
 
     private static final String TAG = "GameRenderer";
-
-    public static final float[] LIGHT_POS_IN_WORLD_SPACE = new float[] { 0.0f, 2.0f, 0.0f, 1.0f };
+    private static final float[] LIGHT_POS_IN_WORLD_SPACE = new float[] { 0.0f, 2.0f, 0.0f, 1.0f };
     private static final float Z_NEAR = 0.1f;
     private static final float Z_FAR = 100.0f;
     private static final float CAMERA_Z = 0.01f;
     private final float[] lightPosInEyeSpace = new float[4];
 
-    public float[] camera;
-    public float[] view;
-    public float[] headView;
-    public float[] modelViewProjection;
-    public float[] modelView;
+    private float[] camera;
+    private float[] view;
+    private float[] headView;
+    private float[] modelViewProjection;
+    private float[] modelView;
 
     private DrawFloor drawFloor;
     private DrawFloor drawCeiling;

@@ -7,15 +7,12 @@ import android.util.Log;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
-import java.util.Random;
 
 import de.uni_marburg.fb12.grosskreuz.cephalea.R;
 import de.uni_marburg.fb12.grosskreuz.cephalea.ResLoader;
 
 /**
  * based on refactored TreasureHunt example
- *
- * 123
  *
  * Created by Felix on 05.04.2015.
  */
@@ -28,12 +25,9 @@ public class DrawFloor {
     private FloatBuffer floorNormals;
 
     private float[] LIGHT_POS_IN_WORLD_SPACE;
-    private static final int COORDS_PER_VERTEX = 3;
 
-    private float[] modelFloor;
-    private float[] modelViewProjection;
-    private float[] modelView;
     private float[] lightPosInEyeSpace;
+    private static final int COORDS_PER_VERTEX = 3;
 
     private int floorProgram;
 
@@ -44,6 +38,10 @@ public class DrawFloor {
     private int floorModelViewParam;
     private int floorModelViewProjectionParam;
     private int floorLightPosParam;
+
+    private float[] modelFloor;
+    private float[] modelViewProjection;
+    private float[] modelView;
 
     boolean bot;
 
