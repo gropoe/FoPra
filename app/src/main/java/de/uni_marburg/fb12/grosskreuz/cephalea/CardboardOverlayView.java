@@ -60,7 +60,7 @@ public class CardboardOverlayView extends LinearLayout {
     setVisibility(View.VISIBLE);
 
     textFadeAnimation = new AlphaAnimation(1.0f, 0.0f);
-    textFadeAnimation.setDuration(5000);
+    textFadeAnimation.setDuration(50000);
   }
 
   public void show3DToast(String message) {

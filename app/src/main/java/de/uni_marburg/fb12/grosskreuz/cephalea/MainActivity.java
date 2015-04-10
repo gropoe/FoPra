@@ -26,6 +26,6 @@ public class MainActivity extends CardboardActivity{
         setCardboardView(cardboardView);
 
         overlayView = (CardboardOverlayView) findViewById(R.id.overlay);
-        overlayView.show3DToast("Hello VR World!");
+        overlayView.show3DToast("Hello VR World! \n Bewege Kamera auf der X Achse");
     }
 }

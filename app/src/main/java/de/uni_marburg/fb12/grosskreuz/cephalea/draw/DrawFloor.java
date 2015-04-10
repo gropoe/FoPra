@@ -162,12 +162,12 @@ public class DrawFloor {
     }
 
     public static final float[] FLOOR_COORDS = new float[] {
-            200f, 0, -200f,
+             200f, 0, -200f,
             -200f, 0, -200f,
-            -200f, 0, 200f,
-            200f, 0, -200f,
-            -200f, 0, 200f,
-            200f, 0, 200f,
+            -200f, 0,  200f,
+             200f, 0, -200f,
+            -200f, 0,  200f,
+             200f, 0,  200f,
     };
 
     public static final float[] FLOOR_NORMALS = new float[] {
@@ -180,12 +180,12 @@ public class DrawFloor {
     };
 
     public static final float[] FLOOR_COLORS = new float[] {
-            0.0f, 0.2f, 0.7f, 0.9f,
-            0.0f, 0.2f, 0.7f, 0.9f,
-            0.0f, 0.2f, 0.7f, 0.9f,
-            0.0f, 0.2f, 0.7f, 0.9f,
-            0.0f, 0.2f, 0.7f, 0.9f,
-            0.0f, 0.2f, 0.7f, 0.9f,
+            0.0f, 0.8f, 0.7f, 0.9f,
+            0.0f, 0.8f, 0.7f, 0.9f,
+            0.0f, 0.8f, 0.7f, 0.9f,
+            0.0f, 0.8f, 0.7f, 0.9f,
+            0.0f, 0.8f, 0.7f, 0.9f,
+            0.0f, 0.8f, 0.7f, 0.9f,
     };
 
 }

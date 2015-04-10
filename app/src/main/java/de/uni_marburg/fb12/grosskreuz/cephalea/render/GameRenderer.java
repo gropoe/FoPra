@@ -5,6 +5,7 @@ import de.uni_marburg.fb12.grosskreuz.cephalea.draw.DrawFloor;
 
 import android.opengl.GLES20;
 import android.opengl.Matrix;
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.google.vrtoolkit.cardboard.CardboardView;
@@ -25,6 +26,11 @@ import de.uni_marburg.fb12.grosskreuz.cephalea.draw.DrawTeapot;
  */
 public class GameRenderer implements CardboardView.StereoRenderer{
 
+
+    private long startFrameTime = 0;
+    private long endFrameTime = 0;
+    private static final long targetFPS = 60;
+
     private static final String TAG = "GameRenderer";
     private static final float[] LIGHT_POS_IN_WORLD_SPACE = new float[] { 0.0f, 2.0f, 0.0f, 1.0f };
     private static final float Z_NEAR = 0.1f;
@@ -38,15 +44,17 @@ public class GameRenderer implements CardboardView.StereoRenderer{
     private float[] modelViewProjection;
     private float[] modelView;
 
+
+    // Camera position
+    private float posX = 0, posY = 0, posZ = 0;
+    private boolean forward;
+
     private DrawFloor drawFloor;
     private DrawFloor drawCeiling;
     private DrawTeapot drawTeapot;
     private DrawBackground drawBackground;
 
-    private ResLoader resLoader;
-
     public GameRenderer(ResLoader resLoader) {
-        this.resLoader = resLoader;
 
         camera = new float[16];
         view = new float[16];
@@ -75,14 +83,27 @@ public class GameRenderer implements CardboardView.StereoRenderer{
     }
 
     /**
+     * startFrameTime is used on the method finishFrame to limit the fps
      *
      * @param headTransform The head transformation in the new frame.
      */
     @Override
     public void onNewFrame(HeadTransform headTransform) {
+        startFrameTime = SystemClock.currentThreadTimeMillis();
+
+        if(forward) {
+            if(posX > -10)
+                forward=false;
+            posX += 2;
+        }
+        else {
+            if(posX < -100)
+                forward=true;
+            posX -= 2;
+        }
 
         // Build the camera matrix and apply it to the ModelView.
-        Matrix.setLookAtM(camera, 0, 0.0f, 0.0f, CAMERA_Z, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        Matrix.setLookAtM(camera, 0, posX, posY, posZ, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
         headTransform.getHeadView(headView, 0);
 
@@ -117,12 +138,26 @@ public class GameRenderer implements CardboardView.StereoRenderer{
         drawTeapot.draw(perspective, view);
 
 
-
     }
+
+    /**
+     * at the moment the method is just a basic frame limiter.
+     *
+     * @param viewport
+     */
 
     @Override
     public void onFinishFrame(Viewport viewport) {
 
+        endFrameTime = SystemClock.currentThreadTimeMillis();
+        long sleepTime = 1000/targetFPS - endFrameTime + startFrameTime;
+        if(sleepTime>0)
+            try{
+                Thread.sleep(sleepTime);
+            }
+            catch (Exception e) {
+
+            }
     }
 
     @Override
@@ -135,7 +170,6 @@ public class GameRenderer implements CardboardView.StereoRenderer{
         drawFloor.onSurfaceCreated();
         drawCeiling.onSurfaceCreated();
         drawTeapot.onSurfaceCreated();
-
     }
 
     @Override
@@ -143,7 +177,6 @@ public class GameRenderer implements CardboardView.StereoRenderer{
 
 
     }
-
 
     /**
      * Checks if we've had an error inside of OpenGL ES, and if so what that error is.
